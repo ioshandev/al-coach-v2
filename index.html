@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="theme-color" content="#3b82f6">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>A/L 2026 Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="A/L 2027">
+<title>A/L 2027 Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Sinhala:wght@400;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -168,17 +170,70 @@ section.fa>.g>.card:nth-child(even){animation-delay:-3.5s}
 
 .arena{position:static;display:flex;flex-wrap:wrap;gap:16px 12px;margin-top:22px;border:0;background:none;overflow:visible;min-height:0}.arena:empty{display:none}
 .arena .bub{position:relative;left:auto;top:auto;transform:none;max-width:100%}
+
+/* ===== APP SHELL ===== */
+:root{padding:0!important;--bh:68px;--th:54px}
+*{-webkit-tap-highlight-color:transparent}html,body{overscroll-behavior-y:none}
+button,.pill,.tab,.tile,.item,.d{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+body{padding-top:calc(var(--th) + env(safe-area-inset-top,0px));padding-bottom:calc(var(--bh) + 28px + env(safe-area-inset-bottom,0px))}
+body::after,nav,footer{display:none!important}
+body>section{display:none;padding:14px 14px 10px!important}body>section#hero{padding-top:10px!important}
+body>section.cur{display:block;animation:scr .28s both}@keyframes scr{from{opacity:0;transform:translateY(10px)}}
+.rv{opacity:1!important;transform:none!important}section.fa>.card,section.fa>.g>.card{animation:none}
+@media(hover:none){.card:hover,.pill:hover,.tab:hover,.ghost:hover,.btn:hover{transform:none}}
+.btn:active,.ghost:active,.tab:active,.tile:active,.item:active,.d:active{transform:scale(.95)}
+#ab{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;gap:8px;padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+#ab h1{font:800 1.12rem Sora;flex:1;display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap}#abT{overflow:hidden;text-overflow:ellipsis}
+#net{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);flex:none}#net.off{background:var(--orange);box-shadow:0 0 8px var(--orange)}
+.ib{width:40px;height:40px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:1.05rem;display:grid;place-items:center;cursor:pointer;padding:0}
+#bn{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:40;height:var(--bh);display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:6px;border-radius:26px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);box-shadow:0 14px 40px -12px rgba(60,40,160,.5)}
+#bn button{border:0;background:none;color:var(--mute);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:600 .64rem Inter;cursor:pointer;transition:.25s;padding:0}
+#bn button i{font-style:normal;font-size:1.35rem;line-height:1;transition:transform .25s}
+#bn button.on{color:#fff;background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:0 8px 20px -8px var(--blue)}#bn button.on i{transform:scale(1.12)}
+.sh{position:fixed;inset:0;z-index:60;display:none;align-items:flex-end;background:rgba(5,5,20,.55);backdrop-filter:blur(3px)}.sh.s{display:flex}
+.sh>div{width:100%;max-height:86vh;overflow:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:10px 16px calc(22px + env(safe-area-inset-bottom,0px));animation:up .3s cubic-bezier(.2,.8,.2,1);border-top:1px solid var(--line)}
+@keyframes up{from{transform:translateY(100%)}}.sh .gr{display:block;width:44px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 14px}.sh h3{margin:4px 0 12px}
+#toast{bottom:calc(var(--bh) + 28px + env(safe-area-inset-bottom,0px))}
+.chat{height:calc(100dvh - 250px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:360px}
+
+/* ===== v2: compact + animations + palette ===== */
+.card{padding:14px;border-radius:20px}.sb{padding:10px 6px}.val{font-size:1.25rem}.lbl{font-size:.62rem}.ch{height:170px}
+.fr{width:180px;height:180px}.fr>div{width:150px;height:150px}
+.g3{grid-template-columns:repeat(3,1fr)!important;gap:8px}#hero .fc{padding:10px 4px}#hero .fc .em{font-size:1.4rem}#hero .fc .val{font-size:1.1rem}#hero .fc .lbl{font-size:.55rem}
+.cd{gap:8px;margin:14px 0 6px}.cd div{flex:1;min-width:0;padding:8px 4px}.cd b{font-size:1.25rem}
+.ph{width:min(180px,48vw)}.hp{padding:8px}.o{width:38px;height:38px;font-size:1.1rem;border-radius:12px}
+.hin{gap:12px}#hero h1{font-size:clamp(1.8rem,8.5vw,2.6rem)}.typ{margin:8px 0 14px}h2{font-size:1.4rem}.sub{margin:4px 0 14px;font-size:.9rem}
+.im{width:66px;height:66px;font-size:2.1rem}.tgs{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.sk{width:56px!important;height:56px!important;font-size:1.9rem!important}.dc{padding:12px 8px}.tile{padding:10px 4px}
+textarea{width:100%;background:var(--inp);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px 12px;font:inherit;font-size:16px;resize:vertical;margin-bottom:10px}
+input[type=color]{height:38px;border:1px solid var(--line);border-radius:10px;background:var(--inp);padding:2px;width:56px}
+.dn b{text-decoration:line-through;color:var(--mute)}.nt [contenteditable]{outline:none}.nt .q{margin-top:4px}
+#picB{position:absolute;right:2%;bottom:2%;z-index:4;width:42px;height:42px;background:var(--card)}
+.pw{display:flex;flex-wrap:wrap;gap:8px}.pal{width:44px;height:44px;border-radius:50%;border:3px solid transparent;cursor:pointer;padding:0}.pal.on{border-color:var(--text)}
+.gb{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font:700 .8rem Sora;cursor:pointer;padding:0}.gb.on{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+body::before{inset:-15%;animation:aur 22s ease-in-out infinite alternate}@keyframes aur{to{transform:translate(6%,4%) rotate(8deg) scale(1.1)}}
+#bgfx{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+#bgfx span{position:absolute;bottom:-80px;font-size:var(--s);opacity:0;animation:bgf var(--d) linear infinite;animation-delay:var(--dl)}
+#bgfx span:empty{width:calc(var(--s)*16);height:calc(var(--s)*16);border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--oc,var(--pink)),transparent 70%)}
+#bgfx span:nth-child(3n+1):empty{--oc:var(--blue)}#bgfx span:nth-child(3n+2):empty{--oc:var(--orange)}
+@keyframes bgf{0%{transform:translate(0,0) rotate(0);opacity:0}10%,90%{opacity:.4}100%{transform:translate(var(--dx),-115vh) rotate(40deg);opacity:0}}
+.ent{animation:cin .5s cubic-bezier(.2,.8,.2,1) calc(var(--n,0)*55ms) both!important}@keyframes cin{from{opacity:0;transform:translateY(22px) scale(.97)}}
+.btn{position:relative;overflow:hidden}.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);transform:translateX(-120%);animation:shn 3.5s ease-in-out infinite}@keyframes shn{60%,100%{transform:translateX(120%)}}
+#bn button.on i{animation:bnb .5s}@keyframes bnb{40%{transform:translateY(-8px) scale(1.25)}}
+.bf{position:fixed;pointer-events:none;z-index:99;font-size:1.2rem;animation:cf 1s ease-out forwards}
+body.noanim *,body.noanim *::before,body.noanim *::after{animation:none!important}body.noanim #bgfx,body.noanim .fl{display:none}
+.hbtns{display:flex;gap:10px;width:100%;align-items:stretch}.hbtns .btn,.hbtns .ghost{flex:1 1 0;min-width:0;height:48px;margin:0;padding:0 10px;display:flex;align-items:center;justify-content:center;text-align:center;font:600 .95rem Inter,sans-serif;line-height:1;border-radius:99px;box-sizing:border-box;text-decoration:none}
 </style>
 </head>
 <body>
-<nav><div class="logo">A/L<span>.2026</span></div><div class="pills" id="navl"></div><button class="pill" id="theme" aria-label="Switch theme">🌙</button></nav>
+<nav><div class="logo">A/L<span>.2027</span></div><div class="pills" id="navl"></div><button class="pill" id="theme" aria-label="Switch theme">🌙</button></nav>
 
 <section id="hero"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 <div class="hin"><div class="hl">
 <div class="sub" id="greet" style="margin:0 0 8px;font-weight:500"></div>
 <h1>Hi, I'm <span id="nm" class="grad" contenteditable="true" spellcheck="false" title="Click to edit your name">OSHAN dev</span></h1>
 <div class="typ"><span id="typed"></span><i></i></div>
-<a class="btn" href="#study" style="text-decoration:none;display:inline-block">Open dashboard</a> <a class="ghost" href="#marks" style="display:inline-block">Marks analytics</a>
+<div class="hbtns"><a class="btn" href="#study">Open dashboard</a><a class="ghost" href="#marks">Marks analytics</a></div>
 <div class="cdl">⏳ Countdown to A/L exam <input type="date" id="examDate" aria-label="Exam date"></div>
 <div class="cd"><div class="card"><b id="cd1">0</b><small>days</small></div><div class="card"><b id="cd2">0</b><small>hours</small></div><div class="card"><b id="cd3">0</b><small>minutes</small></div><div class="card"><b id="cd4">0</b><small>seconds</small></div></div>
 <div class="g g3" style="margin-top:24px">
@@ -282,6 +337,10 @@ section.fa>.g>.card:nth-child(even){animation-delay:-3.5s}
 
 <section id="roadmap" class="rv"><h2>🧭 Roadmap to AI science</h2><p class="sub">Tap a stage to open it.</p><div class="tl" id="tl"></div></section>
 
+<section id="notes" class="rv"><h2>🗒️ Notes & to-do</h2><p class="sub">Liyaganna one ewa methana liyanna. Offline wath wada karanawa.</p>
+<div class="card"><input type="text" id="ntT" placeholder="Title / task…" style="margin-bottom:10px"><textarea id="ntB" rows="3" placeholder="Details (optional)"></textarea>
+<div class="row r2"><select id="ntK"><option value="note">📝 Note</option><option value="todo">☑️ To-do</option></select><select id="ntS"></select></div><button class="btn full" id="ntAdd">Add</button></div>
+<div class="row r2" style="margin:12px 0 8px"><input type="text" id="ntQ" placeholder="🔍 Search"><select id="ntF"></select></div><div id="ntL"></div></section>
 <section id="dream" class="rv"><h2>🌠 Dream board</h2><p class="sub">The life I'm building. Tap a dream when I've won it 🎉</p>
 <div class="card db" id="db"><div class="gl gla"></div><div class="gl glb"></div><div class="fx" id="fx"></div>
 <div class="hd"><span class="st1">✨</span><span class="mi">MIND IT!</span><span class="st2">💫</span></div><div class="dq" id="dq"></div>
@@ -289,37 +348,30 @@ section.fa>.g>.card:nth-child(even){animation-delay:-3.5s}
 <div class="bar" style="margin-bottom:30px"><i id="dBar" style="background:linear-gradient(90deg,var(--blue),var(--pink),var(--orange))"></i></div>
 <div class="cl" id="jr"></div></div></section>
 <footer>Your data is saved in this browser only.</footer>
+<header id="ab"><h1><span id="abI">🏠</span><span id="abT">A/L.2026</span><span id="net" title="online"></span></h1><button class="ib" id="abA" aria-label="Study AI">🤖</button><button class="ib" id="abTh" aria-label="Theme">🌓</button><button class="ib" id="abS" aria-label="Settings">⚙️</button></header>
+<div id="bn"><button data-go="hero"><i>🏠</i>Home</button><button data-go="study"><i>📚</i>Study</button><button data-go="discipline"><i>✅</i>Habits</button><button data-go="focus"><i>⏱️</i>Focus</button><button id="bnMore"><i>☰</i>More</button></div>
+<div class="sh" id="moreSh"><div><span class="gr"></span><h3>All sections</h3><div class="tiles" id="moreG"></div></div></div>
+<div class="sh" id="setSh"><div><span class="gr"></span><h3>⚙️ Settings</h3><div class="sg" style="margin-top:0">🎨 Colour palette</div><div class="pw" id="palG"></div>
+<div class="li" style="margin-top:10px;align-items:center"><span class="lbl" style="margin:0">Custom</span><input type="color" id="pc1" value="#3b82f6"><input type="color" id="pc2" value="#d946ef"></div>
+<div class="sg">🖼️ Home picture</div><button class="ghost sm" id="picS" style="width:100%">Change picture</button><input type="file" id="picF" accept="image/*" hidden>
+<div class="sg">📲 App icon</div><div class="li" style="align-items:center"><img id="icP" width="60" height="60" style="border-radius:16px" alt=""><div class="pw" id="icG" style="flex:1"></div></div>
+<p class="lbl" style="text-transform:none">Icon eka wenas wenne Home screen ekata aluthen Add karanakota witharai.</p>
+<div class="sg">✨ Animations</div><button class="ghost sm" id="anB" style="width:100%"></button>
+<div class="sg">🤖 Study AI</div>
+
+<label class="lbl">Gemini API key</label><input type="password" id="gKey" placeholder="Paste your key here" autocomplete="off">
+<label class="lbl" style="margin-top:10px">Model</label><input type="text" id="gModel" placeholder="gemini-flash-latest">
+<button class="btn full" id="gSave">Save AI settings</button>
+<p class="lbl" style="margin:10px 0 0;text-transform:none">Key එක save වෙන්නේ ඔයාගේ phone එකේ විතරයි. AI එකට විතරක් internet ඕනේ.</p>
+<div class="sg">💾 Backup</div>
+<div class="btns" style="grid-template-columns:1fr 1fr"><button class="ghost sm" id="bkE">Export backup</button><button class="ghost sm" id="bkI">Import backup</button></div><input type="file" id="bkF" accept="application/json" hidden>
+<button class="btn full" id="inst" style="display:none;margin-top:14px">📲 Install app</button></div></div>
 <div id="toast"></div>
 <div id="modal"><div><img id="mimg" alt="Exported study log"><p>Press and hold (or right-click) the image to save it. Tap outside to close.</p></div></div>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script>
-window.__SRV={};window.__SYNC=false;
-(function(){var tg=window.Telegram&&Telegram.WebApp,base='',hdr=null,web=null;
-/* WEB MODE (GitHub Pages / normal browser): open the page once with  #cfg=https://YOUR-RAILWAY-URL|YOUR_WEB_KEY  and it is remembered on this device */
-try{var m=/[#&]cfg=([^&]+)/.exec(location.hash);if(m){var p=decodeURIComponent(m[1]).split('|');if(p[0]&&p[1])localStorage.setItem('__web',JSON.stringify({base:p[0].replace(/\/+$/,''),key:p[1]}));history.replaceState(null,'',location.pathname+location.search)}}catch(e){}
-try{web=JSON.parse(localStorage.getItem('__web')||'null')}catch(e){}
-if(tg&&tg.initData){hdr={'X-Init-Data':tg.initData};try{tg.ready();tg.expand()}catch(e){}}
-else if(web&&web.base&&web.key){base=web.base;hdr={'X-Web-Key':web.key}}
-else return;
-window.__API=base;window.__HDR=hdr;
-try{var x=new XMLHttpRequest();x.open('GET',base+'/api/data',false);for(var h in hdr)x.setRequestHeader(h,hdr[h]);x.send();
-if(x.status==200){var d=JSON.parse(x.responseText).data||{};window.__SRV=d;window.__SYNC=true;
-Object.keys(d).forEach(function(k){if(k[0]!=='_')localStorage.setItem(k,JSON.stringify(d[k]))})}}catch(e){}})();
-</script>
 <script>
 const $=s=>document.querySelector(s),root=document.documentElement;
-const store=(()=>{const pend={};let tm=null;
-const canon=v=>JSON.stringify(v,(k,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.keys(x).sort().reduce((o,q)=>(o[q]=x[q],o),{}):x);
-const hd=()=>Object.assign({'Content-Type':'application/json'},window.__HDR||{});
-function push(items){try{fetch((window.__API||'')+'/api/data',{method:'POST',keepalive:true,headers:hd(),body:JSON.stringify({items})}).catch(()=>Object.assign(pend,items))}catch(e){}}
-function flush(){tm=null;const it=Object.assign({},pend);for(const k in pend)delete pend[k];if(Object.keys(it).length)push(it)}
-function pull(){if(!window.__SYNC||tm)return;fetch((window.__API||'')+'/api/data',{headers:hd()}).then(r=>r.json()).then(j=>{const d=j.data||{};let ch=false;for(const k in d){if(k[0]==='_')continue;let l=null;try{l=JSON.parse(localStorage.getItem(k))}catch(e){}if(canon(l)!==canon(d[k])){localStorage.setItem(k,JSON.stringify(d[k]));ch=true}}if(ch)location.reload()}).catch(()=>{})}
-addEventListener('pagehide',()=>{if(tm){clearTimeout(tm);flush()}});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){if(tm){clearTimeout(tm);flush()}}else pull()});
-if(window.__SYNC){setInterval(pull,20000);setTimeout(()=>{const up={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k[0]==='_')continue;if(!(k in window.__SRV)){try{up[k]=JSON.parse(localStorage.getItem(k))}catch(e){}}}if(Object.keys(up).length)push(up)},2500)}
-return{get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
-set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}if(window.__SYNC){pend[k]=v;clearTimeout(tm);tm=setTimeout(flush,700)}}}})();
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const css=n=>getComputedStyle(root).getPropertyValue(n).trim();
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('s');setTimeout(()=>t.classList.remove('s'),2200)}
 const bar=(id,p)=>$(id).style.width=Math.min(100,Math.max(0,p))+'%';
@@ -483,11 +535,16 @@ function say(t,c){const d=document.createElement('div');d.className='m '+c;d.tex
 say('ආයුබෝවන් OSHAN! 👋 මම ඔයාගේ A/L Study AI. Combined Maths, Physics, Chemistry ගැන Sinhala, Singlish හෝ English වලින් අහන්න. මම සිංහලෙන් පැහැදිලි කරන්නම්.','ai');
 $('#chips').innerHTML=['Integration explain karanna','Newton\'s laws mokakda?','Mole concept easy way ekak','Revision plan ekak denna'].map(t=>`<button class="ghost">${esc(t)}</button>`).join('');
 $('#chips').onclick=e=>{if(e.target.tagName==='BUTTON')ask(e.target.textContent)};
-async function ask(q){q=q.trim();if(!q)return;$('#q').value='';say(q,'me');hist.push('Student: '+q);const b=say('…','ai');
- try{const r=await fetch((window.__API||'')+'/api/ai',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},window.__HDR||{}),body:JSON.stringify({prompt:SYS+'\n\nConversation so far:\n'+hist.slice(-8).join('\n')+'\n\nReply as Study AI now.'})});
-  if(!r.ok)throw{code:r.status===401?'auth':r.status===503?'nokey':r.status===429?'rate_limited':'err'};
-  const j=await r.json();b.textContent=j.text;hist.push('Study AI: '+j.text)}
- catch(e){b.textContent=e.code==='auth'?'AI භාවිතා කිරීමට Telegram bot එකේ "Web APP" button එකෙන් dashboard එක open කරන්න.':e.code==='nokey'?'AI key එක server එකේ (Railway → ANTHROPIC_API_KEY) තවම සකසා නැහැ.':e.code==='rate_limited'?'ඉල්ලීම් වැඩියි. තත්පර කිහිපයකින් නැවත උත්සාහ කරන්න.':'මේ වෙලාවේ AI එකට සම්බන්ධ වෙන්න බැහැ. පසුව නැවත උත්සාහ කරන්න.'}
+async function ask(q){q=q.trim();if(!q)return;$('#q').value='';say(q,'me');const b=say('…','ai');
+ const key=store.get('gkey',''),model=store.get('gmodel','gemini-flash-latest');
+ if(!key){b.textContent='මුලින්ම Settings (⚙️) එකේ Gemini API key එක දාන්න.';openSh('setSh');return}
+ if(!navigator.onLine){b.textContent='📴 Offline. AI එකට internet ඕනේ. අනිත් features ඔක්කොම offline වැඩ කරනවා.';return}
+ hist.push({role:'user',parts:[{text:q}]});
+ try{const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},body:JSON.stringify({systemInstruction:{parts:[{text:SYS}]},contents:hist.slice(-9)})});
+  const j=await r.json();if(!r.ok)throw new Error((j.error&&j.error.message)||r.status);
+  const t=((j.candidates&&j.candidates[0]&&j.candidates[0].content&&j.candidates[0].content.parts)||[]).map(p=>p.text||'').join('')||'(හිස් පිළිතුරක්, නැවත අහන්න)';
+  b.textContent=t;hist.push({role:'model',parts:[{text:t}]})}
+ catch(e){hist.pop();b.textContent='AI error: '+e.message}
  MS.scrollTop=MS.scrollHeight}
 $('#send').onclick=()=>ask($('#q').value);$('#q').onkeydown=e=>{if(e.key==='Enter')ask($('#q').value)};
 /* ===== ROADMAP ===== */
@@ -658,7 +715,7 @@ function dcDraw(){const c=document.getElementById('dcCard');if(!c||typeof dayPct
  c.innerHTML=`<div class="dcr"><div class="dcs"><b>🔥 ${st}</b><small>day streak<br>best ${best}</small></div><div style="flex:1;min-width:150px"><div class="row2"><span class="lbl" style="margin:0">Study today</span><b>${h.toFixed(1)} / <input type="number" id="dcGoal" value="${g}" min="1" max="16" step=".5" style="width:58px;padding:2px 6px"> h</b></div><div class="bar"><i style="width:${pc}%"></i></div><div class="row2" style="margin-top:8px"><span class="lbl" style="margin:0">Habits today</span><b>${hp}%</b></div><div class="bar"><i style="width:${hp}%"></i></div></div></div><p class="lbl" style="margin:10px 0 6px">${hp>=70?'Streak is safe today 💪':'Finish at least 70% of habits to keep the streak.'}</p><button class="${pl?'ghost':'btn'} sm" id="dcPl" ${pl?'disabled':''}>${pl?'✅ Pledged for today':'✍️ I pledge: no excuses today'}</button>`}
 document.addEventListener('change',e=>{if(e.target.id==='dcGoal'){store.set('goalH',e.target.value);dcDraw()}});
 document.addEventListener('click',e=>{if(e.target.id==='dcPl'){store.set('pledge',dk(new Date()));toast('Pledge made. Now prove it 🔥');dcDraw()}else setTimeout(dcDraw,80)});
-setInterval(dcDraw,3000);setTimeout(dcDraw,300);setTimeout(()=>{try{if(window.__SYNC&&!('habits' in window.__SRV))store.set('habits',habits)}catch(e){}},1500);
+setInterval(dcDraw,3000);setTimeout(dcDraw,300);
 $('#pnA').onclick=()=>{const t=$('#pnT').value.trim();if(!t)return toast('Type a task first');pns.push({id:uid(),t,d:$('#pnD').value,s:$('#pnS').value,done:false});store.set('tasks',pns);$('#pnT').value='';pnDraw()};
 $('#pnL').addEventListener('click',e=>{if(e.target.closest('[data-px]'))pns=pns.filter(p=>p.id!==e.target.closest('[data-px]').dataset.px);else{const i=e.target.closest('[data-pn]');if(!i)return;const p=pns.find(q=>q.id===i.dataset.pn);p.done=!p.done}store.set('tasks',pns);pnDraw()});
 function msDraw(){const f=$('#msF').value,L=mss.filter(m=>f==='all'||m.s===f);$('#msStat').textContent=`${L.length} mistakes · ${L.filter(m=>m.r).length} revised`;
@@ -668,11 +725,14 @@ $('#msF').onchange=msDraw;
 $('#msL').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.md)mss=mss.filter(m=>m.id!==b.dataset.md);else if(b.dataset.mr){const m=mss.find(x=>x.id===b.dataset.mr);m.r=!m.r}else return;store.set('mist',mss);msDraw()});
 
 /* ===== NAVIGATION (scroll between sections) ===== */
-const NP=[['hero','🏠','Home','#06b6d4'],['study','📚','Study log','#10b981'],['marks','📈','Marks','#ec4899'],['discipline','✅','Habits','#22c55e'],['plan','🗓️','90 days','#3b82f6'],['mist','🧠','Mistakes','#ef4444'],['planner','📅','Planner','#eab308'],['papers','📝','Papers','#8b5cf6'],['focus','⏱️','Focus','#f97316'],['targets','🎯','Targets','#d946ef'],['ai','🤖','Study AI','#6366f1'],['roadmap','🧭','Roadmap','#14b8a6'],['dream','🌠','Dreams','#f59e0b']];
+const NP=[['hero','🏠','Home','#06b6d4'],['study','📚','Study log','#10b981'],['marks','📈','Marks','#ec4899'],['discipline','✅','Habits','#22c55e'],['plan','🗓️','90 days','#3b82f6'],['mist','🧠','Mistakes','#ef4444'],['planner','📅','Planner','#eab308'],['notes','🗒️','Notes','#f59e0b'],['papers','📝','Papers','#8b5cf6'],['focus','⏱️','Focus','#f97316'],['targets','🎯','Targets','#d946ef'],['ai','🤖','Study AI','#6366f1'],['roadmap','🧭','Roadmap','#14b8a6'],['dream','🌠','Dreams','#f59e0b']];
 $('#navl').innerHTML=NP.map(x=>`<a class="pill" href="#${x[0]}" data-go="${x[0]}">${x[1]} ${x[2]}</a>`).join('');
 $('.hl').insertAdjacentHTML('beforeend','<div class="arena" id="arena"></div>');
 $('.hl').insertAdjacentHTML('beforeend','<div class="sg">🔥 Discipline</div><div class="card" id="dcCard"></div>');
-function go(id){const el=document.getElementById(id);if(!el)return;if(id==='hero')window.scrollTo({top:0,behavior:'smooth'});else el.scrollIntoView({behavior:'smooth',block:'start'})}
+function go(id,push=true){const el=document.getElementById(id);if(!el||!el.matches('body>section'))return;
+ document.querySelectorAll('body>section.cur').forEach(s=>s.classList.remove('cur'));el.classList.add('cur','v');window.scrollTo(0,0);mark(id);setBar(id);closeSheets();
+ if(push&&!(history.state&&history.state.s===id))history.pushState({s:id},'');
+ stag(el);requestAnimationFrame(()=>Object.values(ch).forEach(c=>{try{c.resize()}catch(e){}}))}
 document.addEventListener('click',e=>{const g=e.target.closest('[data-go]'),a=e.target.closest('a[href^="#"]'),id=g?g.dataset.go:(a&&a.getAttribute('href').slice(1));if(id&&document.getElementById(id)){e.preventDefault();go(id)}});
 function mark(id){document.querySelectorAll('#navl .pill').forEach(b=>{const on=b.dataset.go===id;b.classList.toggle('on',on);if(on){const c=$('#navl');c.scrollTo({left:b.offsetLeft-c.clientWidth/2+b.offsetWidth/2,behavior:'smooth'})}})}
 const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)mark(e.target.id)}),{rootMargin:'-40% 0px -55% 0px'});
@@ -714,6 +774,67 @@ Object.keys(FX).forEach(id=>{const sec=document.getElementById(id);if(!sec)retur
 initStudy();drawList();setSub('Physics');window.ready=true;renderPapers();fDraw();pnDraw();msDraw();mark("hero");
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}}),{threshold:.08});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ===== APP SHELL JS ===== */
+const MAIN=['hero','study','discipline','focus'];
+function closeSheets(){document.querySelectorAll('.sh').forEach(s=>s.classList.remove('s'))}
+function openSh(id){closeSheets();$('#'+id).classList.add('s')}
+function setBar(id){const x=NP.find(n=>n[0]===id);$('#abT').textContent=id==='hero'?'A/L.2027':x[2];$('#abI').textContent=x[1];
+ document.querySelectorAll('#bn button').forEach(b=>b.classList.toggle('on',b.dataset.go===id||(b.id==='bnMore'&&!MAIN.includes(id))))}
+$('#moreG').innerHTML=NP.filter(n=>!MAIN.includes(n[0])).map(n=>`<button class="tile" data-go="${n[0]}"><span class="ic" style="--c:${n[3]};width:50px;height:50px;font-size:1.6rem">${n[1]}</span>${n[2]}</button>`).join('');
+$('#bnMore').onclick=()=>openSh('moreSh');$('#abA').onclick=()=>go('ai');$('#abTh').onclick=()=>$('#theme').click();
+$('#abS').onclick=()=>{$('#gKey').value=store.get('gkey','');$('#gModel').value=store.get('gmodel','gemini-flash-latest');openSh('setSh')};
+$('#gSave').onclick=()=>{store.set('gkey',$('#gKey').value.trim());store.set('gmodel',$('#gModel').value.trim()||'gemini-flash-latest');closeSheets();toast('AI settings saved ✅')};
+document.querySelectorAll('.sh').forEach(s=>s.addEventListener('click',e=>{if(e.target===s)closeSheets()}));
+$('#bkE').onclick=()=>{const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k!=='gkey')o[k]=localStorage.getItem(k)}
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(o)],{type:'application/json'}));a.download='al-backup-'+dk(new Date())+'.json';a.click();toast('Backup saved 💾')};
+$('#bkI').onclick=()=>$('#bkF').click();
+$('#bkF').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{const o=JSON.parse(t);Object.keys(o).forEach(k=>localStorage.setItem(k,o[k]));location.reload()}).catch(()=>toast('Invalid backup file'))};
+const net=()=>$('#net').classList.toggle('off',!navigator.onLine);addEventListener('online',net);addEventListener('offline',net);net();
+let dip;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dip=e;$('#inst').style.display='block'});$('#inst').onclick=()=>{dip&&dip.prompt()};
+addEventListener('popstate',e=>go((e.state&&e.state.s)||'hero',false));
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+/* ===== v2 JS ===== */
+function stag(el){el.querySelectorAll(':scope>.card,:scope>.g>.card,:scope>.tiles>*,:scope .tc,:scope .dw,:scope>#ntL>*').forEach((c,i)=>{c.style.setProperty('--n',Math.min(i,12));c.classList.remove('ent');void c.offsetWidth;c.classList.add('ent')})}
+const PAL=[['Ocean','#3b82f6','#8b5cf6','#d946ef','#f97316'],['Sunset','#f97316','#ef4444','#ec4899','#eab308'],['Forest','#10b981','#14b8a6','#22c55e','#84cc16'],['Royal','#6366f1','#8b5cf6','#a855f7','#06b6d4'],['Rose','#ec4899','#f43f5e','#d946ef','#fb923c'],['Cyber','#06b6d4','#22d3ee','#a3e635','#f0abfc'],['Gold','#eab308','#f59e0b','#f97316','#ef4444']];
+const rgba=(h,a)=>{const n=parseInt(h.slice(1),16);return `rgba(${n>>16},${n>>8&255},${n&255},${a})`};
+function curPal(){const v=store.get('pal',0);return typeof v==='number'?PAL[v].slice(1):v}
+function mkIcon(n,g,p){const c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d'),gr=x.createLinearGradient(0,0,n,n);gr.addColorStop(0,p[0]);gr.addColorStop(.5,p[1]);gr.addColorStop(1,p[2]);x.fillStyle=gr;x.fillRect(0,0,n,n);x.fillStyle='#fff';x.textAlign='center';x.textBaseline='middle';
+ if(g==='AL'){x.font='800 '+n*.34+'px Sora,Arial,sans-serif';x.fillText('A/L',n/2,n*.44);x.font='700 '+n*.15+'px Sora,Arial,sans-serif';x.fillText('2027',n/2,n*.68)}else{x.font=n*.52+'px "Apple Color Emoji","Noto Color Emoji",sans-serif';x.fillText(g,n/2,n*.54)}return c.toDataURL('image/png')}
+function setIcon(){const g=store.get('icg','AL'),p=curPal(),a=mkIcon(192,g,p);$('#icP').src=a;if(!store.get('icg',0))return;
+ document.querySelectorAll('link[rel=icon],link[rel=apple-touch-icon]').forEach(l=>l.href=a);const b=new URL('./',location.href).href,z=mkIcon(512,g,p);
+ const m={name:'A/L 2027 Dashboard',short_name:'A/L 2027',start_url:b,scope:b,display:'standalone',orientation:'portrait',background_color:'#080b17',theme_color:p[0],icons:[{src:a,sizes:'192x192',type:'image/png'},{src:z,sizes:'512x512',type:'image/png',purpose:'any'},{src:z,sizes:'512x512',type:'image/png',purpose:'maskable'}]};
+ document.querySelector('link[rel=manifest]').href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'}))}
+function applyPal(){const p=curPal();['--blue','--purple','--pink','--orange'].forEach((v,i)=>root.style.setProperty(v,p[i]));root.style.setProperty('--g1',rgba(p[2],.22));root.style.setProperty('--g2',rgba(p[0],.25));
+ document.querySelector('meta[name=theme-color]').content=p[0];const v=store.get('pal',0);document.querySelectorAll('.pal').forEach((b,i)=>b.classList.toggle('on',v===i));setIcon();if(window.ready&&typeof refreshAll==='function')refreshAll()}
+$('#palG').innerHTML=PAL.map((p,i)=>`<button class="pal" data-i="${i}" aria-label="${p[0]}" style="background:linear-gradient(135deg,${p[1]},${p[2]},${p[3]})"></button>`).join('');
+$('#palG').onclick=e=>{const b=e.target.closest('.pal');if(b){store.set('pal',+b.dataset.i);applyPal()}};
+['pc1','pc2'].forEach(i=>$('#'+i).onchange=()=>{const a=$('#pc1').value,b=$('#pc2').value;store.set('pal',[a,a,b,b]);applyPal()});
+$('#icG').innerHTML=['AL','🎓','📚','🧠','🚀','⚡','🔥','🎯'].map(g=>`<button class="gb" data-g="${g}">${g==='AL'?'A/L':g}</button>`).join('');
+$('#icG').onclick=e=>{const b=e.target.closest('.gb');if(!b)return;store.set('icg',b.dataset.g);setIcon();document.querySelectorAll('.gb').forEach(x=>x.classList.toggle('on',x===b));toast('Icon set 📲 Home screen ekata aluthen add karanna')};
+const gi=store.get('icg','AL');document.querySelectorAll('.gb').forEach(x=>x.classList.toggle('on',x.dataset.g===gi));
+function anSet(){const on=store.get('anim',true);document.body.classList.toggle('noanim',!on);$('#anB').textContent='Animations: '+(on?'ON ✨':'OFF')}
+$('#anB').onclick=()=>{store.set('anim',!store.get('anim',true));anSet()};anSet();
+const hp=store.get('heroPic','');if(hp)$('.pi img').src=hp;
+$('#picS').onclick=()=>$('#picF').click();
+$('#picF').onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image,u=URL.createObjectURL(f);im.onload=()=>{const c=document.createElement('canvas'),n=480,m=Math.min(im.width,im.height);c.width=c.height=n;c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,n,n);const d=c.toDataURL('image/jpeg',.85);store.set('heroPic',d);$('.pi img').src=d;URL.revokeObjectURL(u);closeSheets();toast('Picture updated 📸')};im.src=u};
+(function(){const em=[...'✨⭐📚💡🎯🔥🧠🚀'],b=document.createElement('div');b.id='bgfx';b.setAttribute('aria-hidden','true');
+ b.innerHTML=Array.from({length:16},(_,i)=>`<span style="left:${(i*6.2+Math.random()*4).toFixed(1)}%;--s:${(1+Math.random()*1.4).toFixed(2)}rem;--d:${(14+Math.random()*14).toFixed(1)}s;--dl:${(-Math.random()*20).toFixed(1)}s;--dx:${(Math.random()*80-40).toFixed(0)}px">${i%3?'':em[i%em.length]}</span>`).join('');document.body.prepend(b)})();
+function burst(x,y){if(document.body.classList.contains('noanim'))return;[...'🎉✨⭐💫🎊🔥✨'].forEach(t=>{const e=document.createElement('i');e.className='bf';e.textContent=t;e.style.cssText=`left:${x}px;top:${y}px;--x:${Math.random()*180-90}px;--y:${-40-Math.random()*110}px`;document.body.appendChild(e);setTimeout(()=>e.remove(),1000)})}
+document.addEventListener('click',e=>{if(e.target.closest('.btn,.item'))burst(e.clientX,e.clientY)});
+/* notes */
+const NK='notes_v1',NT=['General','Physics','Pure','Applied','Chemistry','Personal'];let nts=store.get(NK,[]);const nsv=()=>store.set(NK,nts);
+$('#ntS').innerHTML=NT.map(t=>`<option>${t}</option>`).join('');$('#ntF').innerHTML=['All',...NT].map(t=>`<option>${t}</option>`).join('');
+function ntDraw(){const q=$('#ntQ').value.toLowerCase(),f=$('#ntF').value;
+ $('#ntL').innerHTML=nts.filter(n=>(f==='All'||n.s===f)&&(n.t+n.b).toLowerCase().includes(q)).sort((a,b)=>b.p-a.p||b.id-a.id).map(n=>`<div class="card nt${n.d?' dn':''}" data-id="${n.id}" style="margin-bottom:10px;padding:12px"><div style="display:flex;gap:10px;align-items:flex-start">${n.k==='todo'?`<div class="box" data-a="tg" style="--c:var(--green);cursor:pointer${n.d?';background:var(--green);color:#fff':''}">✓</div>`:'<span>📝</span>'}<div style="flex:1;min-width:0"><b contenteditable data-a="et" spellcheck="false">${esc(n.t)}</b><div contenteditable data-a="eb" class="q" style="white-space:pre-wrap">${esc(n.b)}</div><small class="lbl" style="margin:6px 0 0">${n.s} · ${new Date(n.id).toLocaleDateString()}</small></div><button class="ghost sm" data-a="pn" style="padding:6px 10px">${n.p?'📌':'📍'}</button><button class="ghost sm del" data-a="dl" style="padding:6px 10px">✕</button></div></div>`).join('')||'<span class="lbl">Nothing here yet</span>'}
+$('#ntAdd').onclick=()=>{const t=$('#ntT').value.trim();if(!t)return toast('Title ekak liyanna');nts.push({id:Date.now(),t,b:$('#ntB').value.trim(),k:$('#ntK').value,s:$('#ntS').value,p:0,d:0});nsv();$('#ntT').value=$('#ntB').value='';ntDraw();toast('Saved 🗒️')};
+$('#ntQ').oninput=$('#ntF').onchange=ntDraw;
+$('#ntL').addEventListener('click',e=>{const a=e.target.closest('[data-a]'),c=e.target.closest('.nt');if(!a||!c)return;const n=nts.find(x=>x.id==c.dataset.id),k=a.dataset.a;
+ if(k==='tg')n.d=n.d?0:1;else if(k==='pn')n.p=n.p?0:1;else if(k==='dl'){if(!confirm('Delete this?'))return;nts=nts.filter(x=>x!==n)}else return;nsv();ntDraw()});
+$('#ntL').addEventListener('focusout',e=>{const a=e.target.dataset.a,c=e.target.closest('.nt');if(!c||(a!=='et'&&a!=='eb'))return;const n=nts.find(x=>x.id==c.dataset.id);if(n){n[a==='et'?'t':'b']=e.target.textContent.trim();nsv()}});
+ntDraw();applyPal();
+history.replaceState({s:'hero'},'');go('hero',false);
 </script>
 </body>
 </html>
